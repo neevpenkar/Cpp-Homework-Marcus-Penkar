@@ -22,10 +22,11 @@ class DataFile
 
 		DataFile(const char* newname, const char* newdata);
 		DataFile();
+		// Take a second look at the copy constructor
 		DataFile(const DataFile& copiedObj);
 
 		void setData(const char* newdata);
-		//void editData(const char* newdata);
+		void editData(const char* newdata);
 		void setFileName(const char* newname);
 		void dir() const;
 

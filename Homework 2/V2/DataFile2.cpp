@@ -27,7 +27,7 @@ DataFile::DataFile(const char* newname, const char* newdata)
 
 DataFile::DataFile()
 {
-	char defaultName[] = "sampleFile.np";
+	char defaultName[] = "sampleFile.npGM";
 	char defaultData[] = "Yo!";
 
 	this->setFileName(defaultName);
@@ -47,6 +47,13 @@ void DataFile::setData(const char* newdata)
 	int length = strlen(newdata);
 	this->data = new char[length + 1];
 	strcpy(this->data, newdata);
+}
+
+void DataFile::editData(const char* newdata)
+{
+	delete[] data;
+	this->setTime();
+	this->setData(newdata);
 }
 
 void DataFile::setFileName(const char* newname)
@@ -76,6 +83,7 @@ void DataFile::dir() const
 
 	char* t = this->getTime();
 	cout << t << endl;
+
 	delete[] t;
 }
 
@@ -103,6 +111,7 @@ char* DataFile::getTime() const
 	// Possible data leak - there seems to be no option of freeing stringTime
 	char buf[80];
 	strftime(buf, sizeof(buf), "%d/%m/%Y %X", this->lastUpdated);
+	
 	char* stringTime = new char[strlen(buf) + 1];
 	strcpy(stringTime, buf);
 	return stringTime;
