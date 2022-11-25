@@ -31,7 +31,7 @@ DataFile::DataFile(const char* newname, const char* newdata)
 
 	this->fileCounter++;
 }
-
+```
 DataFile::DataFile()
 {
 	char defaultName[20 + 5] = "sampleFile";
@@ -55,7 +55,7 @@ DataFile::DataFile()
 	this->fileInitNum++;
 	this->fileCounter++; // Will need to be removed if two args constructor is fixed and used
 }
-
+```
 DataFile::DataFile(const DataFile& copiedObj)
 {
 	this->setFileName(copiedObj.getFileName());
@@ -112,14 +112,14 @@ void DataFile::setTimeManually(tm* add)
 {
 	this->lastUpdated = add;
 }
-
+```
 bool DataFile::operator==(DataFile const& fileB)
 {
 	bool i = strcmp(this->fileName, fileB.fileName);
 	bool j = strcmp(this->data, fileB.data);
 	return (!i) * (!j);
 }
-
+```
 DataFile::~DataFile()
 {
 	delete[] this->data;
