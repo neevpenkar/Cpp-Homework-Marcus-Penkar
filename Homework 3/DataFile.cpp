@@ -113,11 +113,27 @@ void DataFile::setTimeManually(tm* add)
 	this->lastUpdated = add;
 }
 
+const DataFile& DataFile::operator=(const DataFile& newfile)
+{
+	DataFile temp(newfile.getFileName(), newfile.getData());
+	return temp;
+}
+
 bool DataFile::operator==(DataFile const& fileB)
 {
 	bool i = strcmp(this->fileName, fileB.fileName);
 	bool j = strcmp(this->data, fileB.data);
 	return (!i) * (!j);
+}
+
+bool DataFile::operator>(DataFile const& fileB)
+{
+	return strlen(this->getData()) > strlen(fileB.getData());
+}
+
+bool DataFile::operator<(DataFile const& fileB)
+{
+	return strlen(this->getData()) < strlen(fileB.getData());
 }
 
 DataFile::~DataFile()
@@ -151,6 +167,18 @@ char* DataFile::getTime() const
 	char* stringTime = new char[strlen(buf) + 1];
 	strcpy(stringTime, buf);
 	return stringTime;
+}
+
+ostream& operator<<(ostream& os, DataFile const& file)
+{
+	os << file.getFileName() << "\t";
+	os << file.getData() << "\t";
+
+	char* t = file.getTime();
+	os << t << endl;
+	delete[] t;
+
+	return os;
 }
 
 // Auxilary Func Defs

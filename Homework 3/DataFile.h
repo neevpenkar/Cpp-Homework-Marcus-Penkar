@@ -5,7 +5,7 @@
 
 #define CONSOLECLEAR cin.clear(); \
 					cin.ignore(INT_MAX, '\n');
-
+using namespace std;
 class DataFile
 {
 private:
@@ -38,7 +38,11 @@ public:
 	void setTimeManually(tm* add);
 
 	// Operators
+	const DataFile& operator = (const DataFile& newfile);
 	bool operator == (DataFile const& fileB);
+	bool operator > (DataFile const& fileB);
+	bool operator < (DataFile const& fileB);
+	friend ostream& operator << (ostream& os, DataFile const & file);
 
 	~DataFile();
 	int activeFiles() { return fileCounter; };
