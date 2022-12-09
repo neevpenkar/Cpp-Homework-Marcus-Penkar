@@ -141,7 +141,6 @@ bool DataFile::operator<(DataFile const& fileB)
 {
 	return strlen(this->getData()) < strlen(fileB.getData());
 }
-
 DataFile::~DataFile()
 {
 	delete[] this->data;

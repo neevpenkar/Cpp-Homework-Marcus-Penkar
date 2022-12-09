@@ -35,10 +35,19 @@ void Folder::readAllFiles()
 	char buffer[200];
 
 	strcpy(buffer, this->path);
-	strcat(buffer, "\\");
+	//strcat(buffer, "\\");
 	strcat(buffer, this->folderName);
 
-	this->fileArray.ArrayDataFiles::readAllFiles(buffer);
+	try {
+		this->fileArray.ArrayDataFiles::readAllFiles(buffer);
+	}
+	catch (int errorCode) {
+		if (errorCode == -1) {
+			cout << "Error Opening File!" << endl;
+			cout << "# Make sure the file exists and is name has been entered correctly" << endl;
+			return;
+		}
+	}
 }
 
 const Folder& Folder::operator=(const Folder& fol)
@@ -102,11 +111,14 @@ Folder::~Folder()
 	delete[] this->path;
 }
 
-//ostream& operator<<(ostream& out, Folder const& folder)
-//{
-//	out << (folder.path) << '\\' << folder.folderName << ':';
-//	for (int i = 0; i < folder.fileArray.getLength(); i++) {
-//		cout << *(folder.fileArray.filePointArr[i]);
-//	}
-//	return out;
-//}
+ostream& operator<<(ostream& out, Folder const& folder)
+{
+	out << folder.path << "\\" << folder.folderName << endl;
+
+	for (int i = 0; i < folder.fileArray.len; i++)
+	{
+		out << *(folder.fileArray.filePointArr[i]);
+	}
+	
+	return out;
+}

@@ -25,7 +25,7 @@ class Folder
 		bool operator == (const Folder& fol);
 		void operator += (const DataFile newfile);
 
-		//friend ostream& operator << (ostream& out, Folder const & folder);
+		friend ostream& operator << (ostream& out, Folder const & folder);
 
 		void classEditHelper();
 

@@ -50,10 +50,9 @@ const DataFile* ArrayDataFiles::bigFile_2()
 
 void ArrayDataFiles::readAllFiles(const char* fileName)
 {
-	//ifstream check;
-	//check.open(fileName);
-	//if (check);
-	//else throw("File Does Not Exist");
+	ifstream check(fileName);
+	if (!check.is_open()) throw(-1);
+	check.close();
 
 	string myText;
 	char buffer[150];
@@ -104,7 +103,6 @@ void ArrayDataFiles::operator+=(const DataFile newfile)
 		*(this->filePointArr[0]) = newfile;
 	}
 	else {
-		
 		// Check if the file already exists
 		for (int n = 0; n < this->len; n++)
 			if (*(this->filePointArr[n]) == newfile) {

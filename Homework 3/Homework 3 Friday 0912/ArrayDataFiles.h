@@ -35,6 +35,6 @@ class ArrayDataFiles
 
 		~ArrayDataFiles();
 		friend class Folder;
-		friend class ostream;
+		friend ostream& operator << (ostream& out, Folder const& folder);
 };
 

@@ -12,6 +12,9 @@ int main() {
 	// Question 2
 	testF.Folder::readAllFiles();
 
+	// Question 3
+	cout << testF << endl;
+
 	// Question 4 -> As if the user had inputed arguments:
 	DataFile file1("firstfile.txt", "is it working? BIIIIIIIIIIIIIIIIIIIIIIG");
 	DataFile file2("seondfile.txt", "is it working?");
@@ -31,7 +34,6 @@ int main() {
 
 	// Question 7 -> Assume arguments were inputed by user:
 	Folder folder2("StamFile.txt", "");
-	folder2.readAllFiles();
 
 	DataFile exe1 ("MahKoreh.txt", "Guy");
 	DataFile exe2 ("MaKoreh.txt", "Neev");
@@ -44,11 +46,3 @@ int main() {
 
 	return 0;
 }
-
-//int main() {
-//	Folder folder2("ListDataFiles.txt", "");
-//	folder2.readAllFiles();
-//
-//	folder2.debugFunc1();
-//	return 0;
-//}
