@@ -2,22 +2,23 @@
 #include <string>
 
 using namespace std;
-
 class AD_File
 {
 	protected:
-		string FileName;
+		string Filename;
 		tm* lastUpdateTime;
-	public:
-		AD_File(string name);
 
-		void setFileName(string newname) throw(char*);
+	public:
+		AD_File(string newname="");
+
+		void setFilename(string newname) throw(string);
 		void setTime();
 
-		string getFileName() const;
+		// For security purposes, a copy of Filename is returned
+		// A reference may be needed in the future to Filename
+		string getFilename() const { return this->Filename; }
+
+		bool operator == (AD_File& const secondFile) const;
 		string getTime() const;
-
-		bool operator == (const AD_File& secondFile);
-
 };
 

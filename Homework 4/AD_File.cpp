@@ -1,70 +1,52 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "AD_File.h"
+#include <string>
 #include <iostream>
-
 
 using namespace std;
 
-// This func is not working as expected, may need to write it once again all over
-void AD_File::setFileName(string newname) throw(char*)
+AD_File::AD_File(string newname)
 {
-	string ftmp = newname;
-	bool check = false;
-
-	while (check == false)
-	{
-		bool x = true;
-		for (int i = 0; i < ftmp.length(); i++)
-		{
-			if (ftmp[i] == '<' || ftmp[i] == '>' || ftmp[i] == '?' || ftmp[i] == '*' ||
-				ftmp[i] == ':' || ftmp[i] == '/' || ftmp[i] == '\\' || ftmp[i] == '|' || ftmp[i] == '\"')
-			{
-				throw("Prohibited characters used!");
-			}
-		}
-		if (x == true)
-		{
-			check = true;
-		}
-	}
-	this->FileName = ftmp;
+	this->setFilename(newname);
+	this->setTime();
 }
 
-AD_File::AD_File(string name)
+void AD_File::setFilename(string newname) throw(string)
 {
-	try {
-		this->setFileName(name);
-		this->setTime();
-	}
-	catch (char* erMsg) {
-		cout <<"Error: " << erMsg;
-		exit(-10);
-	}
+	char prohibited[] = "/\\*<?>:";
+	string msg = "Prohibited Chars Used";
+
+	for (int i = 0; i < newname.length(); i++)
+		for (int j = 0; j < sizeof(prohibited); j++)
+			if (newname[i] == prohibited[j])
+				throw msg;
+	this->Filename = newname;
 }
 
+// Time funcs
 void AD_File::setTime()
 {
-	// current date/time based on current system
 	time_t now = time(0);
 	lastUpdateTime = localtime(&now);
 }
+
+bool AD_File::operator==(AD_File& const secondFile) const
+{
+	bool a = (this->Filename == secondFile.Filename);
+	bool b = (this->getTime() == secondFile.getTime());
+	return a && b;
+}
+
 string AD_File::getTime() const
 {
 	char buf[80];
-	strftime(buf, sizeof(buf), "%d/%m/%Y %X", lastUpdateTime);
-	return buf;
-}
+	strftime(buf, sizeof(buf), "%d/%m/%Y %X", this->lastUpdateTime);
 
-string AD_File::getFileName() const
-{
-	return this->FileName;
-}
-
-bool AD_File::operator==(const AD_File& secondFile)
-{
-	bool i = (this->FileName == secondFile.FileName);
-	bool j = (this->getTime() == secondFile.getTime());
-	
-	return i && j;
+	string temp;
+	int i = 0;
+	while (buf[i]) {
+		temp += buf[i]; i++;
+	}
+	return temp;
 }
 
