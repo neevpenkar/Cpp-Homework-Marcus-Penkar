@@ -13,6 +13,11 @@ DataFile::DataFile(string filename, string data)//:AD_File(filename)
 	this->Data = data;
 }
 
+DataFile::DataFile()
+{
+	this->Filename = ""; this->Data = "";
+}
+
 void DataFile::setData(string newdata)
 {
 	this->Data = newdata;

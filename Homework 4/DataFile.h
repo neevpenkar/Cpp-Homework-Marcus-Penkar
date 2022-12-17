@@ -9,6 +9,7 @@ class DataFile: public AD_File
 		string Data;
 	public:
 		DataFile(string filename, string data);
+		DataFile();
 
 		void setData(string newdata);
 		int getSize() const { return this->Data.length(); }
@@ -16,7 +17,6 @@ class DataFile: public AD_File
 		// For security purposes, a copy of Filename is returned
 		// A reference may be needed in the future to Filename
 		string getData() const { return this->Data; }
-
 
 		bool operator == (DataFile& const other);
 };
