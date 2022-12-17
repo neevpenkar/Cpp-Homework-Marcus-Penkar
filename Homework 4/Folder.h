@@ -15,14 +15,26 @@ class Folder:public DataFile
 
 		string Path;
 
+		// Aux
+		string FolderName;
+
 	public:
 		Folder(string path, string filename);
+		Folder();
+		Folder(const Folder& folder2) throw(string);
+		Folder(const Folder& folder2, string path);
+		
+		void mkfile(string filename, string data) throw(string);
+		//void addFileToArray(DataFile newfile) { *this += newfile; };
 		static Folder mainFolder;
 		string getFullPath() const;
 
 		// Operators
-		void operator+=(DataFile& const newfile); //:throw(string);
+		void operator+=(DataFile& const newfile) throw (string);
+		void operator+=(Folder& const newfolder) throw (string);
 
+		// Operator = needs to be implemented
+		const Folder& operator=(const Folder& newfolder);
 
 		// Debug Funcs
 		void debugFunc1();
