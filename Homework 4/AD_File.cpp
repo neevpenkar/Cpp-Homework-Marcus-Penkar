@@ -7,8 +7,13 @@ using namespace std;
 
 AD_File::AD_File(string newname)
 {
-	this->setFilename(newname);
-	this->setTime();
+	try {
+		this->setFilename(newname);
+		this->setTime();
+	}
+	catch (string ermsg) {
+		throw ermsg;
+	}
 }
 
 void AD_File::setFilename(string newname) throw(string)

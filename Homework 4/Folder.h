@@ -6,7 +6,7 @@ using namespace std;
 
 class Folder:public DataFile
 {
-	private:
+	protected:
 		DataFile** fileArray;
 		Folder** folderArray;
 		// Unsigned int but it will lengthen things
@@ -26,6 +26,8 @@ class Folder:public DataFile
 		
 		void mkfile(string filename, string data) throw(string);
 		//void addFileToArray(DataFile newfile) { *this += newfile; };
+		void dir() const;
+
 		static Folder mainFolder;
 		string getFullPath() const;
 
@@ -33,7 +35,6 @@ class Folder:public DataFile
 		void operator+=(DataFile& const newfile) throw (string);
 		void operator+=(Folder& const newfolder) throw (string);
 
-		// Operator = needs to be implemented
 		const Folder& operator=(const Folder& newfolder);
 
 		// Debug Funcs

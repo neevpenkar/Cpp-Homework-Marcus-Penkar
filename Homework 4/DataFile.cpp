@@ -30,5 +30,5 @@ bool DataFile::operator==(DataFile& const other)
 	bool b = this->Data == other.Data;
 	//bool c = this->getTime() == other.getTime();
 	
-	return a && b && c;
+	return a && b;
 }

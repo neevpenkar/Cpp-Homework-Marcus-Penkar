@@ -5,7 +5,7 @@ using namespace std;
 
 class DataFile: public AD_File
 {
-	private:
+	protected:
 		string Data;
 	public:
 		DataFile(string filename, string data);

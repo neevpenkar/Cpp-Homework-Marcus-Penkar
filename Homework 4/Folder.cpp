@@ -1,6 +1,7 @@
 #include "Folder.h"
 #include <iostream>
 #include <string>
+#include <format>
 
 using namespace std;
 Folder::Folder(string path, string folderName)
@@ -51,6 +52,25 @@ void Folder::mkfile(string filename, string data) throw(string)
 	}
 	catch (string errorMsg) {
 		throw(errorMsg);
+	}
+}
+
+void Folder::dir() const
+{
+	// Assumptions: Max FileName displayed: 30 Char 
+	
+	for (int i = 0; i < this->fileArrSize; i++) {
+		cout << this->fileArray[i]->getTime() << " ";
+		cout << "     " << " ";
+		cout << this->fileArray[i]->getSize() << " KB ";
+		cout << this->fileArray[i]->getFilename() << endl;
+	}
+
+	for (int j = 0; j < this->folderArrSize; j++) {
+		cout << this->folderArray[j]->getTime() << " ";
+		cout << "<DIR>" << " ";
+		cout << "---- ";
+		cout << this->FolderName << endl;
 	}
 }
 
@@ -183,7 +203,7 @@ void Folder::debugFunc1()
 
 const Folder& Folder::operator=(const Folder& newfolder)
 {
-	if (&newfolder == this) return;
+	if (&newfolder == this) return *this;
 
 	this->FolderName = newfolder.FolderName;
 	this->Path = newfolder.Path;

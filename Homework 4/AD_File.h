@@ -9,7 +9,7 @@ class AD_File
 		tm* lastUpdateTime;
 
 	public:
-		AD_File(string newname="");
+		AD_File(string newname="") throw(string);
 
 		void setFilename(string newname) throw(string);
 		void setTime();
