@@ -16,7 +16,11 @@ class AD_File
 		void setName(string name) throw(string);
 
 		string getTime() const;
+		string getName() const { return this->Name; }
 
 		bool operator == (const AD_File& file) const;
+		//friend void Folder::operator+=(const DataFile& file) throw(string);
+
+		friend class Folder;
 };
 

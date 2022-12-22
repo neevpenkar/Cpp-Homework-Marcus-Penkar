@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "AD_File.h"
 #include <iostream>
 
