@@ -1,7 +1,9 @@
 #pragma once
 #include "AD_File.h"
 #include "DataFile.h"
+
 class Folder;
+class DataFile;
 
 typedef struct folderArray {
     Folder** arr;
@@ -23,12 +25,19 @@ class Folder :
         string Path;
     public:
         static Folder Root;
-
+        
         Folder(string foldername, string path);
         Folder(const Folder& fol) throw(string);
 
-        void operator += (const DataFile& file) throw(string);
+        Folder& operator += (const DataFile& file) throw(string);
+        Folder& operator += (const Folder& fold) throw(string);
 
         string getFullPath() const;
-};
+        void dir() const;
+        void cat() const;
 
+        ~Folder();
+
+        // Debuging
+        void debugFunc1()const;
+};

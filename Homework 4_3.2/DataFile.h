@@ -13,7 +13,8 @@ class DataFile :
         /*unsigned*/ int getSize() const { return this->Data.length(); }
 
         bool operator == (const DataFile& f) const;
-        string getData()const { return this->Data };
+        string getData()const { return this->Data; };
+        void cat();
 
         //friend void Folder::operator+=(const DataFile & file) throw(string);
         friend class Folder;

@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "AD_File.h"
 #include <iostream>
+#include "color_custom.hpp"
 
 AD_File::AD_File(string name) throw(string)
 {
@@ -29,6 +30,17 @@ string AD_File::getTime() const
 bool AD_File::operator==(const AD_File& file) const
 {
 	return this->Name == file.Name;
+}
+
+void AD_File::cat1() const
+{
+	cout << this->getTime() << " " << this->Name << " ";
+}
+
+void AD_File::cat2() const
+{
+	string temp = this->getTime() + " " + this->Name + " ";
+	cout << dye::aqua(temp);
 }
 
 void AD_File::setName(string name) throw(string)

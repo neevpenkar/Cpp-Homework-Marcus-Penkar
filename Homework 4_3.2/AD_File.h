@@ -20,6 +20,8 @@ class AD_File
 
 		bool operator == (const AD_File& file) const;
 		//friend void Folder::operator+=(const DataFile& file) throw(string);
+		void cat1() const;
+		void cat2()const;
 
 		friend class Folder;
 };
