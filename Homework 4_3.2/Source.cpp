@@ -5,19 +5,22 @@
 
 using namespace std;
 int main() {
-	Folder test("Av", "\\root");
-	Folder test23("asdsa", "dsadsd");
+	try {
+		Folder temp("", "");
 
-	DataFile file("Ben File", "testDaata");
-	DataFile file2("Ben file2", "rsakajc");
+		Folder test1("C", "");
+		Folder test2("D", "");
 
-	test += file;
-	test += file2;
+		DataFile t1("Neev", "Penkarakfshdgfffiuwgfiwhuofuiegewuuiwegwfiuuwifugwe");
+		DataFile t2("Guy", "Marcus");
 
-	test += test23;
-
-	test.dir();
-	//cout << test.;
+		(temp.Root += test1) += test2;
+		(temp.Root += t1) += t2;
+		temp.Root.dir();
+	}
+	catch (string err) {
+		cout << err;
+	}
 
 	return 0;
 }

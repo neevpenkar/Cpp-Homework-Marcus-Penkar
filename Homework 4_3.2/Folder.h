@@ -28,11 +28,14 @@ class Folder :
         
         Folder(string foldername, string path);
         Folder(const Folder& fol) throw(string);
+        Folder(const Folder& fol, string path);
 
         Folder& operator += (const DataFile& file) throw(string);
         Folder& operator += (const Folder& fold) throw(string);
 
         string getFullPath() const;
+        void mkfile(string name,string data) throw(string);
+        void mkdir(string name) throw(string);
         void dir() const;
         void cat() const;
 

@@ -2,6 +2,9 @@
 #include <iostream>
 
 using namespace std;
+
+Folder Folder::Root("root", "");
+
 // ASK Maayan about throw catch in פקודת איתחול
 // Init line catching exceptions
 
@@ -21,6 +24,21 @@ Folder::Folder(const Folder& fol) throw(string) :AD_File("")
 	throw("No Copy Constructor!");
 }
 
+Folder::Folder(const Folder& fol, string path):AD_File(fol.Name)
+{
+	for (int i = 0; i < this->kvazim.length; i++)
+		delete (this->kvazim.arr)[i];
+	delete[](this->kvazim.arr);
+
+	this->kvazim.arr = new DataFile * [fol.kvazim.length];
+
+	for (int i = 0; i < fol.kvazim.length; i++) {
+		*this += *fol.kvazim.arr[i];
+	}
+
+	this->Path = path;
+}
+
 string Folder::getFullPath() const
 {
 	string temp = "";
@@ -28,6 +46,28 @@ string Folder::getFullPath() const
 	temp += "\\";
 	temp += this->Name;
 	return temp;
+}
+
+void Folder::mkfile(string name, string data) throw(string)
+{
+	try {
+		*this += DataFile(name, data);
+	}
+	catch (string err)
+	{
+		throw err;
+	}
+}
+
+void Folder::mkdir(string name) throw(string)
+{
+	try{
+	*this += Folder(name,this->getFullPath());
+	}
+	catch (string err)
+	{
+		throw err;
+	}
 }
 
 void Folder::dir() const

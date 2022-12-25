@@ -7,6 +7,8 @@ AD_File::AD_File(string name) throw(string)
 {
 	try {
 		this->setName(name);
+		// fsadf
+		// fd rwqr
 		this->setTime();
 	}
 	catch (string err) {

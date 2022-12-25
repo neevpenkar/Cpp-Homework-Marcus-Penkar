@@ -1,5 +1,7 @@
 #include "DataFile.h"
 #include <iostream>
+#include <iomanip>
+#include <math.h>
 
 DataFile::DataFile(string name, string data):AD_File(name)
 {
@@ -14,5 +16,7 @@ bool DataFile::operator==(const DataFile& f) const
 void DataFile::cat()
 {
 	AD_File::cat1();
-	cout << this->Data << endl;
+	//cout << dye::red(temp);
+	cout << std::setprecision(1) << (this->getSize() / 1024.0) << " ";
+	cout << "KB" << endl;
 }
