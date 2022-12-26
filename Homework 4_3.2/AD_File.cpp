@@ -34,6 +34,11 @@ bool AD_File::operator==(const AD_File& file) const
 	return this->Name == file.Name;
 }
 
+void AD_File::operator=(const AD_File& file)
+{
+	this->Name = file.Name;
+}
+
 void AD_File::cat1() const
 {
 	cout << this->getTime() << " " << this->Name << " ";

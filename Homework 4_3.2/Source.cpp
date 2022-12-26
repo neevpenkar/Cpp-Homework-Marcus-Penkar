@@ -5,7 +5,7 @@
 
 using namespace std;
 int main() {
-	try {
+	/*try {
 		Folder temp("", "");
 
 		Folder test1("C", "");
@@ -20,7 +20,23 @@ int main() {
 	}
 	catch (string err) {
 		cout << err;
-	}
+	}*/
+	
+	Folder temp("", "");
+	Folder test1("Guy", "dfhkdui");
+	Folder test2("Neev", "fdaf");
+	
+	temp.Root += test1;
+	temp.Root += test2;
 
+	try {
+		temp.Root.cd("Bibi\\");
+	}
+	catch (string error) {
+		cout << error << endl;
+	}
+	catch (...) {
+		cout << "Errror" << endl;
+	}
 	return 0;
 }

@@ -85,6 +85,31 @@ void Folder::cat() const
 	cout << endl;
 }
 
+void Folder::cd(string path) throw(string)
+{
+	const static char token = '\\';
+
+	if (path.find(token) == -1) {
+		cout << path << endl;
+		return;
+	}
+
+	int slashIndex = path.find(token);
+	string currentPane = path.substr(0, slashIndex);
+
+	// Check if currentPane exists in this object
+	bool exists = false;
+	for (int i = 0; i < this->tikiot.length; i++) {
+		if (this->tikiot.arr[i]->Name == currentPane) exists = true;
+	}
+	if (!exists) {
+		throw(string("Folder Not found!"));
+		return;
+	}
+
+	this->cd(path.substr(slashIndex + 1, path.length()));
+}
+
 Folder::~Folder()
 {
 	for (int i = 0; i < this->kvazim.length; i++)
@@ -160,6 +185,42 @@ Folder& Folder::operator+=(const Folder& fold) throw(string)
 		temp = NULL;
 		this->tikiot.length++;
 	}
+	return *this;
+}
+
+const Folder& Folder::operator=(const Folder& fold)
+{
+	// Init temp object
+	Folder** temp = new Folder * [fold.tikiot.length];
+	DataFile** temp2 = new DataFile * [fold.kvazim.length];
+
+	// Copy all folder objects into temp from argument folder
+	for (int i = 0; i < fold.tikiot.length; i++)
+		temp[i] = new Folder(fold.tikiot.arr[i]->Name, fold.tikiot.arr[i]->Path);
+	
+	// Copy all file objects into temp2 from argument file
+	for (int i = 0; i < fold.kvazim.length; i++)
+		temp2[i] = new DataFile(fold.kvazim.arr[i]->Name, fold.kvazim.arr[i]->Data);
+
+	// Delete existing file and folder containers
+	for (int i = 0; i < this->kvazim.length; i++)
+		delete (this->kvazim.arr)[i];
+	delete[](this->kvazim.arr);
+
+	for (int i = 0; i < this->tikiot.length; i++)
+		delete (this->tikiot.arr)[i];
+	delete[](this->tikiot.arr);
+
+	// Reassigment of arrays
+	this->tikiot.arr = temp;
+	this->kvazim.arr = temp2;
+
+	this->tikiot.length = fold.tikiot.length;
+	this->kvazim.length = fold.kvazim.length;
+
+	AD_File::operator=(fold);
+
+	// // O: insert return statement here
 	return *this;
 }
 

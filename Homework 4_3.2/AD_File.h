@@ -19,6 +19,7 @@ class AD_File
 		string getName() const { return this->Name; }
 
 		bool operator == (const AD_File& file) const;
+		void operator = (const AD_File& file);
 		//friend void Folder::operator+=(const DataFile& file) throw(string);
 		void cat1() const;
 		void cat2()const;

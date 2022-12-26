@@ -32,12 +32,14 @@ class Folder :
 
         Folder& operator += (const DataFile& file) throw(string);
         Folder& operator += (const Folder& fold) throw(string);
+        const Folder& operator = (const Folder& fold);
 
         string getFullPath() const;
         void mkfile(string name,string data) throw(string);
         void mkdir(string name) throw(string);
         void dir() const;
         void cat() const;
+        void cd(string path) throw(string);
 
         ~Folder();
 
