@@ -1,5 +1,6 @@
 ﻿#include "Folder.h"
 #include <iostream>
+#include "Functions.h"
 
 using namespace std;
 
@@ -85,6 +86,22 @@ void Folder::cat() const
 	cout << endl;
 }
 
+//void Folder::cdTest(string path) throw(string)
+//{
+//	// Stopping Condition
+//	if (getNextPane(path) == path) {
+//		cout << path << endl;
+//		return;
+//	}
+//
+//	// Body Of Recursion
+//	// D:
+//	cout << getCurrentPane(path) << endl;
+//
+//	// Step ReKirshon
+//	this->cdTest(getNextPane(path));
+//}
+
 void Folder::cd(string path) throw(string)
 {
 	const static char token = '\\';
@@ -128,6 +145,19 @@ void Folder::debugFunc1() const
 	}
 }
 
+Folder* Folder::cdTest(Folder* baseFolder, string path) throw(string)
+{
+	string cur = getCurrentPane(path);
+
+	if (cur == "<End>") return baseFolder;
+
+	for (int i = 0; i < baseFolder->tikiot.length; i++) {
+		if (baseFolder->tikiot.arr[i]->Name == cur)
+			return cdTest(baseFolder->tikiot.arr[i], getNextPane(path));
+	}
+	throw(string("Folder Not Found!"));
+}
+
 Folder& Folder::operator+=(const DataFile& file) throw(string)
 {
 	if (this->kvazim.length == 0) {
@@ -137,7 +167,7 @@ Folder& Folder::operator+=(const DataFile& file) throw(string)
 	}
 	else {
 		for (int i = 0; i < this->kvazim.length; i++)
-			if (*(this->kvazim.arr[i]) == file) throw("File Exists!");
+			if (*(this->kvazim.arr[i]) == file) throw(string("File Exists!"));
 
 		DataFile** temp = new DataFile * [this->kvazim.length + 1];
 
@@ -226,3 +256,10 @@ const Folder& Folder::operator=(const Folder& fold)
 
 
 
+//void someRecursiveFunction(Folder* base, string path) {
+//	// D:\Ruppin\Subjects
+//	// D:\
+//	// Extract currentPane
+//	// If for every folder in basefolder.folderarray there is a D: folder
+//	// someRecursiveFunction()
+//}

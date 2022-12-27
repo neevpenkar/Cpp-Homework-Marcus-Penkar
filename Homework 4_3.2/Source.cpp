@@ -5,23 +5,6 @@
 
 using namespace std;
 int main() {
-	/*try {
-		Folder temp("", "");
-
-		Folder test1("C", "");
-		Folder test2("D", "");
-
-		DataFile t1("Neev", "Penkarakfshdgfffiuwgfiwhuofuiegewuuiwegwfiuuwifugwe");
-		DataFile t2("Guy", "Marcus");
-
-		(temp.Root += test1) += test2;
-		(temp.Root += t1) += t2;
-		temp.Root.dir();
-	}
-	catch (string err) {
-		cout << err;
-	}*/
-	
 	Folder temp("", "");
 	Folder test1("Guy", "dfhkdui");
 	Folder test2("Neev", "fdaf");
@@ -30,7 +13,18 @@ int main() {
 	temp.Root += test2;
 
 	try {
-		temp.Root.cd("Bibi\\");
+		Folder* changed = temp.cdTest(&(temp.Root), "Guy\\");
+		//cout << changed->getName() << endl;
+		*changed += Folder("test1", "Dasdas");
+		*changed += Folder("Bibi", "Dasdas");
+
+		//changed->dir();
+		//cout << changed->getName() << endl;
+		
+		// Check
+		Folder* changed2 = temp.Root.cdTest(&(temp.Root), "Guy\\Bibi\\");
+		cout << changed2->getName() << endl;
+		cout << changed2->getFullPath() << endl;
 	}
 	catch (string error) {
 		cout << error << endl;

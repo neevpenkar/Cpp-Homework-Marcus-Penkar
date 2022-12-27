@@ -1,6 +1,7 @@
 #pragma once
 #include "AD_File.h"
 #include "DataFile.h"
+#include "Folder.h"
 
 class Folder;
 class DataFile;
@@ -45,4 +46,6 @@ class Folder :
 
         // Debuging
         void debugFunc1()const;
+
+        static Folder* cdTest(Folder* baseFolder, string path) throw(string);
 };
