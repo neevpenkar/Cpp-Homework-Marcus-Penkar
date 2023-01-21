@@ -1,37 +1,36 @@
 #include "DataFile.h"
 
-DataFile::DataFile(string name, string data):AD_File(name), Data(data)
+DataFile::DataFile(string name, string data):AD_File(name)
 {
-}
-
-bool DataFile::operator==(const AD_File* ptr) const
-{
-	ifFalse(typeEquals(*this, *ptr)) return false;
-	ifFalse(this->AD_File::operator==(ptr)) return false;
-
-	const DataFile* temp = dynamic_cast<const DataFile*>(ptr);
-	return temp->Data == this->Data;
-}
-
-bool DataFile::operator==(const DataFile& file) const
-{
-	// Temp
-	return this->Data == file.Data;
+	this->Data = data;
 }
 
 void DataFile::printInfo() const
 {
 	this->AD_File::printInfo();
-	cout << this->Data << "\n";
+	cout << "Data: " << this->Data <<  endl;
 }
 
-void DataFile::debug1() const
+bool DataFile::operator==(const AD_File* baseptr) const
 {
-	cout << this->Name << " " << this->Data << endl;
+	// Check if *baseptr is of type DataFile, else no point in entering body
+	ifFalse(typeEquals(*baseptr, DataFile)) return false;
+
+	// Check if datafile1 == datafile2. Dynamic cast should succeed
+	if (this->AD_File::operator==(baseptr) == false) return false;
+	DataFile* temp = dynamic_cast<DataFile*>((AD_File*)baseptr);
+	return temp->Data == this->Data;
 }
 
-void DataFile::addFileToArray(const AD_File* ptr)
+void DataFile::operator=(const AD_File* ptr) throw(string)
 {
-	return;
+	try {
+		this->AD_File::operator=(ptr);
+		
+		DataFile* temp = dynamic_cast<DataFile*>((AD_File*)ptr);
+		this->Data = temp->Data;
+	}
+	catch (string er) {
+		throw(er);
+	}
 }
-

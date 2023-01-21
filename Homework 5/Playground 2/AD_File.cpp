@@ -1,17 +1,20 @@
 #include "AD_File.h"
 
-AD_File::AD_File(string newname)
+AD_File::AD_File(string name):Name(name)
 {
-	this->Name = newname;
-}
-
-bool AD_File::operator==(const AD_File* ptr) const
-{
-	return this->Name == ptr->Name;
 }
 
 void AD_File::printInfo() const
 {
-	cout << this->Name << "\t";
+	cout << "Name: " << this->Name << endl;
 }
 
+bool AD_File::operator==(const AD_File* baseptr) const
+{
+	return this->Name == baseptr->Name;
+}
+
+void AD_File::operator=(const AD_File* ptr) throw(string)
+{
+	this->Name = ptr->Name;
+}
